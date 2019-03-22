@@ -48,11 +48,13 @@ Manage your notification settings or learn more about vulnerability alerts.
                  :autoplay="false"
                  class='my-carousel'
                  height='560px'
-                 @change='changeCarousel'>
+                 @change='changeCarousel'
+                 ref='carousel'>
       <el-carousel-item v-for="item in address"
                         :key="item.id">
         <div class='card-item'>
-          <h3>{{ item.showDetail?item.detail:item.name }}</h3>
+          <h3>{{ item.name }}</h3>
+          <h4 v-if='item.showDetail'>{{Police[item.police]}} {{City[item.city]}}</h4>
           <el-button icon="el-icon-search"
                      circle
                      @click='handleDetail(item)'>详细</el-button>
@@ -63,22 +65,44 @@ Manage your notification settings or learn more about vulnerability alerts.
 </template>
 
 <script>
-import { Address } from '../address/index.js'
+import { Address, City, Police } from '../address/index.js'
 export default {
   name: 'MyCard',
   data () {
     return {
       msg: '记忆卡片',
       address: [],
-      allAddress: []
+      allAddress: [],
+      City: {},
+      Police: {}
     }
   },
   mounted: function () {
-    let newAddress = this.randomAddress(Address)
+    let newAddress = this.dealAddress(Address)
+    newAddress = this.randomAddress(newAddress)
     this.allAddress = newAddress;
     this.address = newAddress;
+    this.City = City;
+    this.Police = Police;
   },
   methods: {
+    dealAddress (oldAddress) {
+      let newAddress = [];
+      for (let city in oldAddress) {
+        let polices = oldAddress[city];
+        for (let police in polices) {
+          let addressArray = polices[police];
+          addressArray.forEach((address, index) => {
+            address.city = city;
+            address.police = police;
+            address.showDetail = false;
+            newAddress.push(address)
+          })
+        }
+      }
+      console.info(newAddress)
+      return newAddress;
+    },
     randomAddress (oldAddress) {
       let len = oldAddress.length;
       for (let i = 0; i < len - 1; i++) {
@@ -92,8 +116,15 @@ export default {
     selectAddress (type) {
       this.allAddress.forEach((item, index) => {
         item.showDetail = false
-      })
-      this.address = this.allAddress.filter((item, index) => item.level === type || type === 3)
+      });
+
+      let filterAddress = this.allAddress.filter((item, index) => type == 1 && item.level === 1 || type == 2 && item.level <= 2
+        || type === 3);
+      this.address = this.randomAddress(filterAddress);
+      this.$refs.carousel.setActiveItem(0);
+      console.info(this.address)
+      console.info('selectAddress:' + this.address.length)
+      console.info('selectAddress:' + this.address.length)
     },
     handleDetail (item) {
       item.showDetail = !item.showDetail;

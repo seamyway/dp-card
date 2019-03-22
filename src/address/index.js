@@ -1,19 +1,187 @@
-export const Address = [{
+export const City = {
+  'FD': '沣东新城',
+  'QH': '秦汉新城',
+  'KG': '空港新城',
+  'JH': '泾河新城',
+  'FX': '沣西新城'
+}
+export const Police = {
+  'SQ': '三桥新街派出所',
+  'EPG': '阿房宫派出所',
+  'HJ': '镐京大道派出所',
+  'FD': '沣东大道派出所',
+  'JZ': '建章路派出所',
+  'FJ': '沣泾大道派出所'
+}
+export const Address = {
+  'FD': {
+    'SQ': [{
+      id: 'WYC',
+      name: '五一村',
+      level: 2
+    }, {
+      id: 'NBSF',
+      name: '南北双凤',
+      level: 2
+    }, {
+      id: 'GDPZ',
+      name: '高低堡子',
+      level: 2
+    }, {
+      id: 'DXYQM',
+      name: '东西雁秋门',
+      level: 2
+    }, {
+      id: 'XFC',
+      name: '西纺一到六村',
+      level: 2
+    }, {
+      id: 'BGC',
+      name: '柏花一到四村',
+    }, {
+      id: 'ZHDTZ',
+      name: '皂河地铁站',
+      level: 1
+    }, {
+      id: 'HWZDT',
+      name: '后卫寨地铁ACD口',
+      level: 1
+    }, {
+      id: 'MMJY',
+      name: '美美家园',
+      level: 1
+    }, {
+      id: 'JXXY',
+      name: '锦绣新苑',
+    }, {
+      id: 'XXJY',
+      name: '欣欣家园',
+    }, {
+      id: 'XYXQ',
+      name: '欣苑小区',
+    }, {
+      id: 'WYHY',
+      name: '五一花园',
+    }, {
+      id: 'JZSP',
+      name: '建章尚品',
+      level: 1
+    }, {
+      id: 'HLCT',
+      name: '海伦春天',
+      level: 2
+    }, {
+      id: 'QHJY',
+      name: '启航佳苑',
+      level: 1
+    }, {
+      id: 'FQMD',
+      name: '枫桥名邸',
+      level: 1
+    }, {
+      id: 'QHSDGC',
+      name: '启航时代广场',
+      level: 1
+    }, {
+      id: 'SQAZXC',
+      name: '三桥安置新村',
+      level: 2
+    }, {
+      id: 'HRESSC',
+      name: '华润二十四城',
+      level: 1
+    }, {
+      id: 'BLJXB',
+      name: '保利金香槟',
+      level: 1
+    }, {
+      id: 'YJJJ',
+      name: '宜家家居',
+      level: 2
+    }, {
+      id: 'WXCHRWJ',
+      name: '万象城-华润万家',
+      level: 2
+    }, {
+      id: 'DMGJCSC',
+      name: '大明宫建材市场三桥店',
+      level: 2
+    }, {
+      id: 'BCYY',
+      name: '北车医院',
+      level: 2
+    }, {
+      id: 'XACLC',
+      name: '西安车辆厂',
+    }, {
+      id: 'QPHLG',
+      name: '汽配欢乐港',
+    }, {
+      id: 'HTYCC',
+      name: '红太阳仓储',
+      level: 2
+    }, {
+      id: 'SDHC',
+      name: '时代华城',
+    }, {
+      id: 'YHMJ',
+      name: '怡和茗居',
+    }, {
+      id: 'FJL',
+      name: '丰景路',
+    }, {
+      id: 'WJL',
+      name: '武警路',
+      level: 2
+    }, {
+      id: 'SYL',
+      name: '双拥路',
+    }, {
+      id: 'GLYJ',
+      name: '格莱意境',
+      level: 2
+    }, {
+      id: 'SQXJ',
+      name: '三桥新街',
+    }, {
+      id: 'SQLJ',
+      name: '三桥老街',
+    }, {
+      id: 'JZLZND',
+      name: '建章路中南段',
+    }, {
+      id: 'EPL',
+      name: '阿房路',
+      level: 2
+    }, {
+      id: 'EPYESL',
+      name: '阿房一二四路',
+    }, ]
+  },
+  'QH': {},
+  'KG': {},
+  'JH': {},
+  'FX': {}
+}
+export const Address2 = [{
   id: '1',
-  name: '1-1',
-  detail: '1-1-1',
+  name: '五一村',
+  police: 'SQ',
+  city: 'FD',
   level: 1,
   showDetail: false
 }, {
   id: '2',
-  name: '1-2',
-  detail: '2-2-2',
+  name: '南北双凤',
+  police: 'SQ',
+  city: 'FD',
   level: 1,
   showDetail: true
 }, {
   id: '3',
-  name: '2-3',
-  detail: '3-3-3',
+  name: '高低堡子',
+  street: 'SQ',
+  police: 'FD',
   level: 2,
   showDetail: false
 }, {

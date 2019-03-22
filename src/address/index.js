@@ -1,0 +1,31 @@
+export const Address = [{
+  id: '1',
+  name: '1-1',
+  detail: '1-1-1',
+  level: 1,
+  showDetail: false
+}, {
+  id: '2',
+  name: '1-2',
+  detail: '2-2-2',
+  level: 1,
+  showDetail: true
+}, {
+  id: '3',
+  name: '2-3',
+  detail: '3-3-3',
+  level: 2,
+  showDetail: false
+}, {
+  id: '4',
+  name: '2-4',
+  detail: '3-3-3',
+  level: 2,
+  showDetail: false
+}, {
+  id: '5',
+  name: '2-5',
+  detail: '3-3-3',
+  level: 2,
+  showDetail: false
+}]

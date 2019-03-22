@@ -49,7 +49,8 @@ Manage your notification settings or learn more about vulnerability alerts.
                  class='my-carousel'
                  height='560px'
                  @change='changeCarousel'
-                 ref='carousel'>
+                 ref='carousel'
+                 indicator-position='none'>
       <el-carousel-item v-for="item in address"
                         :key="item.id">
         <div class='card-item'>

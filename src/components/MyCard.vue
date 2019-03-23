@@ -27,46 +27,33 @@ Manage your notification settings or learn more about vulnerability alerts.
       <el-row>
         <el-col :span='8'>
           <el-button icon="el-icon-search"
-                     circle
-                     @click='selectAddress(1)'>必备</el-button>
+                     plain
+                     @click='selectAddress(1)'
+                     :class="{'button-selected-primary':type==1}">必备</el-button>
         </el-col>
         <el-col :span='8'>
           <el-button icon="el-icon-search"
-                     circle
-                     @click='selectAddress(2)'>背会</el-button>
+                     plain
+                     @click='selectAddress(2)'
+                     :class="{'button-selected-normal':type==2}">背会</el-button>
         </el-col>
         <el-col :span='8'>
           <el-button icon="el-icon-search"
-                     circle
-                     @click='selectAddress(3)'>全部</el-button>
+                     plain
+                     @click='selectAddress(3)'
+                     :class="{'button-selected':type==3}">全部</el-button>
+
         </el-col>
       </el-row>
     </el-card>
-
-    <el-carousel :interval="5000"
-                 arrow="always"
-                 :autoplay="false"
-                 class='my-carousel'
-                 height='560px'
-                 @change='changeCarousel'
-                 ref='carousel'
-                 indicator-position='none'>
-      <el-carousel-item v-for="item in address"
-                        :key="item.id">
-        <div class='card-item'>
-          <h3>{{ item.name }}</h3>
-          <h4 v-if='item.showDetail'>{{Police[item.police]}} {{City[item.city]}}</h4>
-          <el-button icon="el-icon-search"
-                     circle
-                     @click='handleDetail(item)'>详细</el-button>
-        </div>
-      </el-carousel-item>
-    </el-carousel>
+    <MyCarousel :key='addressLength'
+                :address='address'></MyCarousel>
   </div>
 </template>
 
 <script>
-import { Address, City, Police } from '../address/index.js'
+import { Address } from '../address/index.js'
+import MyCarousel from './MyCarousel.vue'
 export default {
   name: 'MyCard',
   data () {
@@ -74,20 +61,23 @@ export default {
       msg: '记忆卡片',
       address: [],
       allAddress: [],
-      City: {},
-      Police: {}
+      type: "3",
+      addressLength: 0
     }
   },
+  components: { MyCarousel },
   mounted: function () {
+    console.info('mounted:' + Address.length)
     let newAddress = this.dealAddress(Address)
     newAddress = this.randomAddress(newAddress)
     this.allAddress = newAddress;
     this.address = newAddress;
-    this.City = City;
-    this.Police = Police;
   },
   methods: {
     dealAddress (oldAddress) {
+      return oldAddress;
+    },
+    dealAddress2 (oldAddress) {
       let newAddress = [];
       for (let city in oldAddress) {
         let polices = oldAddress[city];
@@ -115,25 +105,16 @@ export default {
       return oldAddress;
     },
     selectAddress (type) {
+      this.type = type;
       this.allAddress.forEach((item, index) => {
         item.showDetail = false
       });
-
       let filterAddress = this.allAddress.filter((item, index) => type == 1 && item.level === 1 || type == 2 && item.level <= 2
-        || type === 3);
+        || type == 3 && item.level <= 3);
       this.address = this.randomAddress(filterAddress);
-      this.$refs.carousel.setActiveItem(0);
-      console.info(this.address)
+      this.addressLength = this.address.length;
       console.info('selectAddress:' + this.address.length)
       console.info('selectAddress:' + this.address.length)
-    },
-    handleDetail (item) {
-      item.showDetail = !item.showDetail;
-    },
-    changeCarousel () {
-      this.address.forEach((item, index) => {
-        item.showDetail = false
-      })
     }
   }
 }
@@ -149,40 +130,27 @@ export default {
 .box-card {
   height: 166px;
 }
-.my-carousel {
-  margin-top: 10px;
-  border: 1px solid #ebeef5;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+.button-selected-primary,
+.button-selected-primary:focus,
+.button-selected-primary:hover {
+  background: #fff;
+  border-color: #f56c6c;
+  color: #f56c6c;
 }
-.el-carousel {
-  padding: 5px;
+
+.button-selected-normal,
+.button-selected-normal:focus,
+.button-selected-normal:hover {
+  background: #fff;
+  border-color: #409eff;
+  color: #409eff;
 }
-.el-carousel__container {
-  height: 600px;
-}
-.el-carousel__item h3 {
+.button-selected,
+.button-selected:focus,
+.button-selected:hover {
+  background: #fff;
+  border-color: #000;
   color: #000;
-  font-size: 40px;
-  font-weight: bold;
-  margin: 0;
-}
-.card-item {
-  height: 100px;
-  margin-top: 250px;
-}
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

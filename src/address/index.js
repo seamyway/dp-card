@@ -439,7 +439,7 @@ export const Address = [{
   },
   {
     "id": "XGC",
-    "name": "X高村",
+    "name": "蔺高村",
     "police": "EPG",
     "city": "FD",
     "level": 2,
@@ -2597,7 +2597,7 @@ export const Address = [{
   },
   {
     "id": "XHZXING",
-    "name": "X河之星",
+    "name": "先河之星",
     "police": "TW",
     "city": "FX",
     "level": 3,

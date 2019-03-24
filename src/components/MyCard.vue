@@ -24,6 +24,12 @@ Manage your notification settings or learn more about vulnerability alerts.
   <div class="my-card">
     <el-card class="box-card">
       <h1>{{msg}}</h1>
+      <el-button icon="el-icon-arrow-right"
+                 plain
+                 size="mini"
+                 @click='openCardList()'
+                 class='card-list'>详细列表</el-button>
+
       <el-row>
         <el-col :span='8'>
           <el-button icon="el-icon-search"
@@ -115,13 +121,16 @@ export default {
       this.addressLength = this.address.length;
       console.info('selectAddress:' + this.address.length)
       console.info('selectAddress:' + this.address.length)
+    },
+    openCardList () {
+      this.$router.push({ path: '/list' })
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped >
 .my-card {
   margin: 0 auto;
   width: 400px;
@@ -129,9 +138,10 @@ export default {
 }
 .box-card {
   height: 166px;
+  position: relative;
 }
 
-.button-selected-primary,
+.my-card .button-selected-primary,
 .button-selected-primary:focus,
 .button-selected-primary:hover {
   background: #fff;
@@ -139,18 +149,28 @@ export default {
   color: #f56c6c;
 }
 
-.button-selected-normal,
+.my-card .button-selected-normal,
 .button-selected-normal:focus,
 .button-selected-normal:hover {
   background: #fff;
   border-color: #409eff;
   color: #409eff;
 }
-.button-selected,
+
+.my-card .button-selected,
 .button-selected:focus,
 .button-selected:hover {
   background: #fff;
   border-color: #000;
   color: #000;
+}
+
+.my-card .el-button.is-plain:focus,
+.el-button.is-plain:hover {
+}
+.card-list {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 </style>

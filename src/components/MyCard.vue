@@ -31,19 +31,25 @@ Manage your notification settings or learn more about vulnerability alerts.
                  class='card-list'>详细列表</el-button>
 
       <el-row>
-        <el-col :span='8'>
+        <el-col :span='6'>
           <el-button icon="el-icon-search"
                      plain
                      @click='selectAddress(1)'
                      :class="{'button-selected-primary':type==1}">必备</el-button>
         </el-col>
-        <el-col :span='8'>
+        <el-col :span='6'>
           <el-button icon="el-icon-search"
                      plain
                      @click='selectAddress(2)'
                      :class="{'button-selected-normal':type==2}">背会</el-button>
         </el-col>
-        <el-col :span='8'>
+        <el-col :span='6'>
+          <el-button icon="el-icon-search"
+                     plain
+                     @click='selectAddress(4)'
+                     :class="{'button-selected-normal':type==4}">村</el-button>
+        </el-col>
+        <el-col :span='6'>
           <el-button icon="el-icon-search"
                      plain
                      @click='selectAddress(3)'
@@ -115,8 +121,13 @@ export default {
       this.allAddress.forEach((item, index) => {
         item.showDetail = false
       });
-      let filterAddress = this.allAddress.filter((item, index) => type == 1 && item.level === 1 || type == 2 && item.level <= 2
-        || type == 3 && item.level <= 3);
+      let filterAddress = []
+      if (type < 4) {
+        filterAddress = this.allAddress.filter((item, index) => type == 1 && item.level === 1 || type == 2 && item.level <= 2
+          || type == 3 && item.level <= 3);
+      } else {
+        filterAddress = this.allAddress.filter((item, index) => item.name.indexOf("村") != -1);
+      }
       this.address = this.randomAddress(filterAddress);
       this.addressLength = this.address.length;
       console.info('selectAddress:' + this.address.length)
